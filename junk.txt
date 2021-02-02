@@ -1,0 +1,53 @@
+import React, { useState } from 'react'
+import { Modal } from '@material-ui/core'
+import CourseCard from './CourseCard'
+
+const EducationInfo = () => {
+    const [openDropDownCourses, setOpenDropDownCourses] = useState(false);
+
+    const handleOpenDropDownCourses = (e) => {
+        e.preventDefault()
+        setOpenDropDownCourses(true)
+    }
+
+    const handleCloseDropDownCourses = (e) => {
+        e.preventDefault()
+        setOpenDropDownCourses(false)
+    }
+    
+    return (
+        <div className="educationInfo">
+            <h1>
+                Hi I’m <span className="secondaryColor">Tufa Amadi</span>, I study&nbsp;
+                <span className="secondaryColor">Theatre Arts</span> here at LoremIpsum.
+                <br/>
+                Below are the courses I’m taking this semester
+            </h1>
+            <div className="courseCards">
+                <CourseCard />
+                <CourseCard />
+                <CourseCard />
+                <CourseCard />
+            </div>
+            <Modal
+                open={openDropDownCourses}
+                onClose={handleCloseDropDownCourses}
+                closeAfterTransition
+                BackdropProps={{
+                timeout: 500,
+                }}
+            >
+                <div className="dropDownCourses">
+                    <button>SENG 265</button>
+                    <button>ENGR 240</button>
+                    <button>CSC 230</button>
+                </div>
+            </Modal>
+            <button onClick={handleOpenDropDownCourses} className="addNewCourse">
+                Add a new course
+            </button>
+        </div>
+    )
+}
+
+export default EducationInfo
