@@ -10,6 +10,29 @@ export enum Colors {
 
 export const textFieldFontSize = 14
 
+export const NO_ERROR = "NO_ERROR"
+
+export const defaultCourseButtonStyles = {
+    color: 'rgba(0,0,0,0.6)',
+    borderColor: 'rgb(221,221,221)',
+    backgroundColor: Colors.LightGrey
+}
+
+export const TemplateTexts = {
+    takingCourses: "Below are the courses I’m taking this semester:",
+    notTakingCourses: "Sadly I am not taking any courses this semester."
+}
+
+export enum ErrorIsRegarding {
+    Nil = -1,
+    Email,
+    Password,
+}
+
+export enum ErrorResponses {
+    UnknownError = "An unknown error occurred",
+}
+
 export const CollegeMajorsData = [
     {
         name: "Theatre Arts",

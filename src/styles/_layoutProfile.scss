@@ -15,10 +15,26 @@
     margin-top: 100px;
     @include flexDisplay(column, flex-start, center);
 
-    img{
-        border: 1px solid black;
+    .innerPicture{
+        overflow: hidden;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 7em;
+        height: 7em;
         border-radius: 50%;
-        height: 7.5em;
+        border: 1px solid black;
+    }
+
+    img{
+        height: 100%;
+        width: auto;
+    }
+
+    svg{
+        color: black;
+        font-size: 5rem;
     }
 
     input{
@@ -51,7 +67,7 @@
 
     .courseCards{
         width: 80%;
-        @include flexDisplay(row, space-between, center);
+        @include flexDisplay(row, center, center);
         flex-wrap: wrap;
     }
 

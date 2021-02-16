@@ -52,8 +52,7 @@ const Home = () => {
             <Header handleLogInOpen={handleLogInOpen} handleSignUpPage1Open={handleSignUpPage1Open}/>
             <SignUpPage1 
                 open={signUpPage1Open} handleClose={handleSignUpClose} 
-                handleSignUpPage2Open={handleSignUpPage2Open}
-                handleLogInOpen={handleLogInOpen}
+                handleLogInOpen={handleLogInOpen} handleSignUpPage2Open={handleSignUpPage2Open}
             />
             <SignUpPage2 
                 open={signUpPage2Open} 

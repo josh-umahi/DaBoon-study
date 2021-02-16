@@ -5,17 +5,15 @@ import { MajorSelect } from '../styles';
 import { textFieldFontSize } from '../../../EnumsAndConstants';
 import { displayCollegeMajorOptions } from '../../../Functions';
 
-const SelectMajor = () => {
-    const [major, setMajor] = React.useState('');
-
-    const handleChange = (event) => {
-        setMajor(event.target.value);
+const SelectMajor = ({ collegeMajor, setCollegeMajor }) => {
+    const handleChange = (e) => {
+        setCollegeMajor(e.target.value);
     };
 
     return (
         <div className='majorSelect'>
             <MajorSelect
-                value={major}
+                value={collegeMajor}
                 onChange={handleChange} displayEmpty
                 fullWidth 
                 variant="outlined"

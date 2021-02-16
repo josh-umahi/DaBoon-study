@@ -34,6 +34,12 @@ export const AuthTextField = withStyles({
             border: shared.border,
             borderRadius: shared.borderRadius,
         },
+        '& p': {
+            marginLeft: 0,
+            marginRight: 0,
+            fontSize: '0.85rem',
+            padding: '0 0.5em',
+        },
         '& input': {
             height: shared.height,
             padding: shared.padding,

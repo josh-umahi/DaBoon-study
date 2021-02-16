@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 import './styles/main.scss'
+import PrivateRoute from './routes/ProfilePage/';
 import Home from './routes/Home';
-import ProfilePage from './routes/ProfilePage';
+import ProfilePage from './routes/ProfilePage/ProfilePage';
+import { AuthProvider } from './contexts/AuthContext';
+
+function Index() {
+  return (
+    <Router>
+      <AuthProvider>
+        <Switch>
+          <PrivateRoute exact path='/' component={ProfilePage} />
+          <Route exact path='/home' component={Home} />
+        </Switch>
+      </AuthProvider>
+    </Router>
+  )
+}
 
 ReactDOM.render(
-  <Home />,
-  document.getElementById('root')
+  <Index />, document.getElementById('root')
 );
-
-// ReactDOM.render(
-//   <ProfilePage />,
-//   document.getElementById('root')
-// );

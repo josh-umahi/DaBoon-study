@@ -3,10 +3,10 @@ import DeleteIcon from '@material-ui/icons/Delete'
 
 import NewCourseCard from './styles'
 
-const CourseCard = () => {
+const CourseCard = ({ courseName }) => {
     return (
         <NewCourseCard>
-            <label>AOT 211</label>
+            <label>{courseName}</label>
             <button className="deleteButton">
                 <DeleteIcon />
             </button>

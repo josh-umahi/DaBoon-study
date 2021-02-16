@@ -9,6 +9,12 @@ const theme = createMuiTheme({
         secondary: {
             main: Colors.Secondary
         },
+        error: {
+            main: Colors.Secondary
+        },
+        action: {
+            disabled: Colors.White,
+        }
     },
     typography: {
         fontFamily: 'Work Sans, sans-serif',

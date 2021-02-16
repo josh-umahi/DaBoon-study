@@ -8,13 +8,14 @@ export default withStyles({
         justifyContent: 'center',
         borderRadius: '15px',
         border: '1px solid black',
-        padding: '28px 1em',
+        width: '213px',
+        padding: '28px 0',
         marginTop: '0.5em',
-        // marginLeft: '1em',
+        marginRight: '1em',
         fontSize: '1.5em',
         boxShadow: 'none',
-        // '&:first-child': {
-        //     marginLeft: '0',
-        // }
+        '&:last-child': {
+            marginRight: '0',
+        }
     }
 })(Card);

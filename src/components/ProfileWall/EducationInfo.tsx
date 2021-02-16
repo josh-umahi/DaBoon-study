@@ -1,9 +1,16 @@
-import React, { useState, useRef } from 'react'
-import CourseCard from './CourseCard'
+import React, { useState, useRef, useEffect } from 'react'
+import { returnTemplateText, displayCollegeCourses } from '../../Functions';
 
-const EducationInfo = () => {
+const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     const [dropDownCoursesIsOpen, setDropDownCoursesIsOpen] = useState(false);
+    const [templateText, setTemplateText] = useState(returnTemplateText(collegeCourses));
+    const [collegeCoursesDisplayed, setCollegeCoursesDisplayed] = useState(displayCollegeCourses(collegeCourses));
     const refForDropDownCourses = useRef(null)
+
+    useEffect(() => {
+        setTemplateText(returnTemplateText(collegeCourses));
+        setCollegeCoursesDisplayed(displayCollegeCourses(collegeCourses));
+    }, [collegeCourses])
 
     const toggleDropDownCourses = (e) => {
         e.preventDefault()
@@ -20,17 +27,12 @@ const EducationInfo = () => {
     return (
         <div className="educationInfo">
             <h1>
-                Hi I’m <span className="secondaryColor">Tufa Amadi</span>, I study&nbsp;
-                <span className="secondaryColor">Theatre Arts</span> here at LoremIpsum.
+                Hi I’m <span className="secondaryColor">{fullName}</span>, I study&nbsp;
+                <span className="secondaryColor">{collegeMajor}</span> here at LoremIpsum.
                 <br/>
-                Below are the courses I’m taking this semester
+                {templateText}
             </h1>
-            <div className="courseCards">
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-                <CourseCard />
-            </div>
+            {collegeCoursesDisplayed}
             <button onClick={toggleDropDownCourses} className="addNewCourse">
                 Add a new course
             </button>
