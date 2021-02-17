@@ -73,7 +73,7 @@ export const EducationInfo_div = styled.div`
     }
 
     .courseCards_div label{
-        ${fontSettings(primaryFont, '1.25rem', 400, 'center', 'black')}
+        ${fontSettings(primaryFont, '1.5rem', 400, 'center', 'black')}
     }
 
     .addNewCourse{
