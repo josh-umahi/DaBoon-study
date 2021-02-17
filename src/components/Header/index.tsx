@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar } from '@material-ui/core';
-import Logo from './Logo';
-import { LogInButton, SignUpButton, SignOutButton, HeaderToolbar } from './styles';
+
+import { Logo_h1, LogInButton, SignUpButton, SignOutButton, HeaderToolbar } from './styles';
 
 interface HeaderProps {
     handleSignUpPage1Open?: any;
@@ -13,9 +13,8 @@ const Header: React.FC<HeaderProps> = ({ handleSignUpPage1Open, handleLogInOpen,
     return (
         <AppBar position="fixed">
             <HeaderToolbar>
-                <Logo />
+            <Logo_h1>DaBoon<span>study</span></Logo_h1>
                 {
-                    // Using an Immediately Invoked Function Exxpression
                     (() => {
                         switch (handleLogInOpen) {
                             case undefined:   return <SignOutButton onClick={handleLogOut}>Sign out</SignOutButton>;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { MenuItem } from '@material-ui/core';
 
-import { MajorSelect } from '../styles';
+import { MajorSelect_outerDiv, MajorSelect } from '../styles';
 import { textFieldFontSize } from '../../../EnumsAndConstants';
 import { displayCollegeMajorOptions } from '../../../Functions';
 
@@ -11,7 +11,7 @@ const SelectMajor = ({ collegeMajor, setCollegeMajor }) => {
     };
 
     return (
-        <div className='majorSelect'>
+        <MajorSelect_outerDiv>
             <MajorSelect
                 value={collegeMajor}
                 onChange={handleChange} displayEmpty
@@ -24,7 +24,7 @@ const SelectMajor = ({ collegeMajor, setCollegeMajor }) => {
                 </MenuItem>
                 {displayCollegeMajorOptions()}
             </MajorSelect>
-        </div>
+        </MajorSelect_outerDiv>
     )
 }
 

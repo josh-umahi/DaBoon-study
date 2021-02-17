@@ -5,11 +5,21 @@ import { useAuth } from '../../contexts/AuthContext'
 const PrivateRoute = ({ component: Component, ...rest}) => {
     const {currentUser} = useAuth()
 
+    // return (
+    //     <Route
+    //         {...rest }
+    //         render={props => {
+    //             return currentUser ? <Component {...props} /> : <Redirect to='/home' />
+    //         }}
+    //     >
+    //     </Route>
+    // )
+
     return (
         <Route
             {...rest }
             render={props => {
-                return currentUser ? <Component {...props} /> : <Redirect to='/home' />
+                return <Component {...props} />
             }}
         >
         </Route>

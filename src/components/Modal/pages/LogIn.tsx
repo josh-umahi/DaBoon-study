@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Modal, Backdrop, Fade, SvgIcon} from '@material-ui/core/';
 import { useHistory } from 'react-router-dom';
 
-import useModalStyles, { GoogleAuth, Submit } from '../styles';
+import useModalStyles, { GoogleAuth, Form_h6, Form_h6_marginBelow, Submit } from '../styles';
 import TextFieldGrouped from '../components/TextFieldGrouped';
 import GoogleLogo from '../../../images/google_icon.svg';
 import { NO_ERROR } from '../../../EnumsAndConstants';
@@ -72,7 +72,7 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
                 <SvgIcon component={GoogleLogo} viewBox="0 0 600 476.6" />
                 Log in with Google
               </GoogleAuth>
-              <h6 className="marginBelowH6">or</h6>
+              <Form_h6_marginBelow>or</Form_h6_marginBelow>
               <TextFieldGrouped emailEntry={emailEntry} passwordEntry={passwordEntry}
                 setEmailEntry={setEmailEntry} setPasswordEntry={setPasswordEntry}
                 textFieldErrorDetails={textFieldErrorDetails}
@@ -82,13 +82,13 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
               >
                 Log in
               </Submit>
-              <h6>
+              <Form_h6>
                 <a href="/">Forgot Password?</a>
-              </h6>
+              </Form_h6>
               <br/>
-              <h6>
+              <Form_h6>
                 Don’t have an account? <button onClick={handleSignUpPage1Open}>Sign up</button>
-              </h6>
+              </Form_h6>
             </div>
           </form>
             

@@ -1,15 +1,15 @@
 import React from 'react'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-import NewCourseCard from './styles'
+import { DeleteButton, NewCourseCard } from './styles'
 
 const CourseCard = ({ courseName }) => {
     return (
         <NewCourseCard>
             <label>{courseName}</label>
-            <button className="deleteButton">
+            <DeleteButton>
                 <DeleteIcon />
-            </button>
+            </DeleteButton>
         </NewCourseCard>
     )
 }

@@ -1,53 +1,67 @@
 import { Button, Toolbar } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
+import styled, { css } from 'styled-components'
+
 import { Colors } from '../../EnumsAndConstants';
 
-export const HeaderToolbar = withStyles({
-    root: {
-        backgroundColor: Colors.White,
-        display: 'flex',
-        justifyContent: 'space-between',
-        boxShadow: 'none !important' 
-    }
-})(Toolbar);
+export const Logo_h1 = styled.h1`
+    font-family: 'Niconne', cursive;
+    font-size: 2.6rem;
+    color: ${Colors.Primary};
 
-export const Auth_Button = withStyles({
-    root: {
-        borderRadius: '8px',
-        border: 0,
-        padding: '0.5em 1.5em',
+    span{
+        font-family: 'Bree Serif', serif;
+        padding-left: 0.075em;
+        font-size: 1.75rem;
+        color: ${Colors.Secondary};
     }
-})(Button);
+`;
 
-export const LogInButton = withStyles({
-    root: {
-        padding: '0.5em 1em',
-        marginRight: '.5em',
-        color: 'black',
-        "&:hover": {
-            backgroundColor: 'rgba(0,0,0,0)',
+export const HeaderToolbar = styled(Toolbar)`
+    && {
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+    }
+`;
+
+export const Auth_Button = css`
+    border-radius: 8px;
+    border: 0;
+    padding: 0.5em 1.5em;
+`;
+
+export const LogInButton = styled(Button)`
+    && {
+        ${Auth_Button}
+        padding: 0.5em 1em;
+        margin-right: 0.5em;
+        color: black;
+        &:hover {
+            background-color: rgba(0,0,0,0);
         }
     }
-})(Auth_Button);
+`;
 
-export const SignUpButton = withStyles({
-    root: {
-        backgroundColor: Colors.Primary,
-        color: 'white',
-        transition: 'transform 200ms',
-        "&:hover": {
-            backgroundColor: Colors.Primary,
-            transform: "translateY(-2px)"
+export const SignUpButton = styled(Button)`
+    && {
+        ${Auth_Button}
+        background-color: ${Colors.Primary};
+        color: white;
+        transition: transform 200ms;
+        &:hover {
+            background-color: ${Colors.Primary};
+            transform: translateY(-2px);
         }
     }
-})(Auth_Button);
+`;
 
-export const SignOutButton = withStyles({
-    root: {
-        backgroundColor: Colors.Secondary,
-        color: 'white',
-        "&:hover": {
-            backgroundColor: Colors.Secondary,
+export const SignOutButton = styled(Button)`
+    && {
+        ${Auth_Button}
+        background-color: ${Colors.Secondary};
+        color: white;
+        &:hover {
+            background-color: ${Colors.Secondary};
         }
     }
-})(Auth_Button);
+`;

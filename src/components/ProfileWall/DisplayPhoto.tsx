@@ -1,18 +1,19 @@
 import React from 'react'
 import DisplayPicPlaceholder from '@material-ui/icons/Person';
 
+import { DisplayPhoto_div } from './styles';
+
 const DisplayPhoto = () => {
     return (
-        <div className="displayPhotoDiv">
+        <DisplayPhoto_div>
             <div className="innerPicture">
-                {/* <img src={TemporaryImage} alt="Display photo" /> */}
                 <DisplayPicPlaceholder />
             </div>
             <label>
                 <input type="file" />
                 <span>Edit profile picture</span>
             </label>
-        </div>
+        </DisplayPhoto_div>
     )
 }
 

@@ -1,12 +1,7 @@
 import React from 'react'
 import { MenuItem } from "@material-ui/core";
 
-import { 
-            CollegeMajorsData, 
-            Colors, TemplateTexts,
-            defaultCourseButtonStyles, 
-            ErrorIsRegarding,
-} from "./EnumsAndConstants";
+import { CollegeMajorsData, Colors, TemplateTexts, defaultCourseButtonStyles, ErrorIsRegarding } from "./EnumsAndConstants";
 import CourseCard from './components/ProfileWall/CourseCard'
 
 export const displayCollegeMajorOptions = () => {
@@ -18,7 +13,7 @@ export const displayCollegeMajorOptions = () => {
 export const displayCollegeCourses = (coursesArray: Array<string>) => {
     if (coursesArray.length > 0) {
         return (
-            <div className="courseCards">
+            <div className="courseCards_div">
                 {
                     coursesArray.map((courseName, i) => {
                         return <CourseCard key={i} courseName={courseName} />

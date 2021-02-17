@@ -6,6 +6,7 @@ export enum Colors {
     Secondary = "rgb(255,26,102)", // #FF1A66
     Grey =  "rgb(121,121,121)", // #797979,
     LightGrey =  "rgb(231,231,232)", // #E7E7E8,
+    LighterGrey =  "rgb(246,246,246)", // #F6F6F6,
 }
 
 export const textFieldFontSize = 14

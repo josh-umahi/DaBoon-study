@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, Backdrop, Fade} from '@material-ui/core/';
 
-import useModalStyles from '../styles';
+import useModalStyles, { Form_h6 } from '../styles';
 
 export default function SignUp({ open, handleClose, handleLogInOpen, children, resetStates }) {
   const classes = useModalStyles()
@@ -25,16 +25,16 @@ export default function SignUp({ open, handleClose, handleLogInOpen, children, r
           <form className={classes.paper}>
             <div className={classes.innerContainer}>
               {children}
-              <h6>
+              <Form_h6>
                 By signing up, you agree to our
                 <a href="/"> Terms</a>,
                 <a href="/"> Data Policy </a>and
                 <a href="/"> Cookies Policy</a>.
-              </h6>
+              </Form_h6>
               <br/>
-              <h6>
+              <Form_h6>
                 Already have an account? <button onClick={handleLogInOpen}>Log in</button>
-              </h6>
+              </Form_h6>
             </div>
           </form>
             

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Submit, AuthTextField } from '../styles';
+import { Submit, AuthTextField, Label_header, Label_headerSmall, CourseButtons_div } from '../styles';
 import SelectMajor from '.././components/SelectMajor';
 import { foundErrorInFullName, toggleCourseButtonColor } from '../../../Functions';
 import SignUp from '../components/SignUp';
@@ -83,7 +83,7 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
       open={open} handleClose={handleClose} 
       handleLogInOpen={handleLogInOpen} resetStates={resetStates}
     >
-      <label className="labelHeader">Tell us about yourself</label>
+      <Label_header>Tell us about yourself</Label_header>
       <AuthTextField  
         value={fullName} 
         onChange={(e)=>setFullName(e.target.value)} 
@@ -94,8 +94,8 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
       <SelectMajor
         collegeMajor={collegeMajor} setCollegeMajor={setCollegeMajor}
       />
-      <label className="labelHeader smaller">Courses</label>
-      <div className="courseButtonGroup">
+      <Label_headerSmall>Courses</Label_headerSmall>
+      <CourseButtons_div>
         {
           CoursesData.map((course, i) => {
             return (
@@ -108,7 +108,7 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
             )
           })
         }
-      </div>
+      </CourseButtons_div>
       <Submit disabled={submitIsDisabled && !loading} fullWidth 
         onClick={submitFinishSignUpForm}
       >

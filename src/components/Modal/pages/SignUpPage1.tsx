@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {SvgIcon} from '@material-ui/core/';
 
-import { GoogleAuth, Submit } from '../styles';
+import { GoogleAuth, Form_h6_marginBelow, Submit } from '../styles';
 import TextFieldGrouped from '../components/TextFieldGrouped';
 import GoogleLogo from '../../../images/google_icon.svg';
 import SignUp from '../components/SignUp';
@@ -57,7 +57,7 @@ export default function SignUpPage1({ open, handleClose, handleLogInOpen, handle
         <SvgIcon component={GoogleLogo} viewBox="0 0 600 476.6" />
         Sign up with Google
       </GoogleAuth>
-      <h6 className="marginBelowH6">or</h6>
+      <Form_h6_marginBelow>or</Form_h6_marginBelow>
       <TextFieldGrouped emailEntry={emailEntry} passwordEntry={passwordEntry}
         setEmailEntry={setEmailEntry} setPasswordEntry={setPasswordEntry}
         textFieldErrorDetails={textFieldErrorDetails}

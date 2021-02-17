@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap');
+
+html{
+    min-height: 100%;
+    background-image: url('../images/wallpaper-70.jpg');
+    background-color: #000000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; 
+}

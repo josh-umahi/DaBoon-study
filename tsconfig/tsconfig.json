@@ -27,7 +27,7 @@
   },
   "include": [
     "./src/**/*.ts",
-    "./src/Functions.tsx"
+    "src/Functions.tsx"
   ],
   "exclude": [
     "node_modules",
