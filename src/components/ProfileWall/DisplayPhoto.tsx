@@ -1,11 +1,11 @@
 import React from 'react'
 import DisplayPicPlaceholder from '@material-ui/icons/Person';
 
-import { DisplayPhoto_div } from './styles';
+import { DisplayPhoto_Div } from './styles';
 
 const DisplayPhoto = () => {
     return (
-        <DisplayPhoto_div>
+        <DisplayPhoto_Div>
             <div className="innerPicture">
                 <DisplayPicPlaceholder />
             </div>
@@ -13,7 +13,7 @@ const DisplayPhoto = () => {
                 <input type="file" />
                 <span>Edit profile picture</span>
             </label>
-        </DisplayPhoto_div>
+        </DisplayPhoto_Div>
     )
 }
 

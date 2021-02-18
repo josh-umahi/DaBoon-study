@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar } from '@material-ui/core';
 
-import { Logo_h1, LogInButton, SignUpButton, SignOutButton, HeaderToolbar } from './styles';
+import { LogoText, LogInButton, SignUpButton, SignOutButton, HeaderToolbar } from './styles';
 
 interface HeaderProps {
     handleSignUpPage1Open?: any;
@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ handleSignUpPage1Open, handleLogInOpen,
     return (
         <AppBar position="fixed">
             <HeaderToolbar>
-            <Logo_h1>DaBoon<span>study</span></Logo_h1>
+            <LogoText>DaBoon<span>study</span></LogoText>
                 {
                     (() => {
                         switch (handleLogInOpen) {

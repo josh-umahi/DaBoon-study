@@ -1,8 +1,8 @@
 import { Card } from '@material-ui/core';
 import styled from 'styled-components';
-import { Colors } from '../../EnumsAndConstants';
 
-import { flexDisplay, fontSettings, primaryFont } from '../../styles/mixins';
+import { Colors, primaryFont } from '../../styles/variables';
+import { flexDisplay, fontSettings } from '../../styles/mixins';
 
 export const DeleteButton = styled.button`
     padding: 0;
@@ -14,7 +14,7 @@ export const DeleteButton = styled.button`
     }
 `
 
-export const DisplayPhoto_div = styled.div`
+export const DisplayPhoto_Div = styled.div`
     margin-top: 100px;
     ${flexDisplay('column', 'flex-start', 'center')}
 
@@ -53,7 +53,7 @@ export const DisplayPhoto_div = styled.div`
     }
 `
 
-export const EducationInfo_div = styled.div`
+export const EducationInfo_Div = styled.div`
     ${flexDisplay('column', 'center', 'center')}
 
     & h1{

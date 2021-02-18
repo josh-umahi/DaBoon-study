@@ -4,7 +4,7 @@ import { TextField } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
 import { primaryFont, fontSettings, flexDisplay } from '../../styles/mixins';
-import { Colors, textFieldFontSize } from '../../EnumsAndConstants';
+import { Colors, textFieldFontSize } from '../../styles/variables';
 
 const shared = {
     border: "2.5px solid "+ Colors.Black,
@@ -15,7 +15,7 @@ const shared = {
     marginBottom: '1.2em'
 }
 
-export const shared_styles = css`
+const shared_styles = css`
     border: ${shared.border};
     border-radius: ${shared.borderRadius};
     line-height: ${shared.lineHeight};
@@ -24,18 +24,18 @@ export const shared_styles = css`
     margin-bottom: ${shared.marginBottom};
 `;
 
-export const Label_header = styled.label`
+export const LabelHeader = styled.label`
     ${fontSettings(primaryFont, '1rem', 400, 'center', 'black')}
     margin: 1em 0;
 `;
 
-export const Label_headerSmall = styled(Label_header)`
+export const LabelHeader_Small = styled(LabelHeader)`
     font-size: 0.9rem;
     margin-top: 1.5em;
     margin-bottom: 0em;
 `
 
-export const Form_h6 = styled.h6`
+export const FormH6 = styled.h6`
     width: 100%;
     color: $grey;
     text-align: center;
@@ -51,11 +51,11 @@ export const Form_h6 = styled.h6`
     }
 `;
 
-export const Form_h6_marginBelow = styled(Form_h6)`
+export const FormH6_MarginBelow = styled(FormH6)`
     margin-bottom: 1.25em;
 `;
 
-export const MajorSelect_outerDiv = styled.div`
+export const MajorSelect_OuterDiv = styled.div`
     width: 100%;
     em{
         color: #9F9F9F;
@@ -118,7 +118,7 @@ export const AuthTextField = styled(TextField)`
     }
 `;
 
-export const GoogleAuth = styled(Button)`
+export const GoogleAuthButton = styled(Button)`
     && {
         ${shared_styles}
         background-color: white;
@@ -133,7 +133,7 @@ export const GoogleAuth = styled(Button)`
     }
 `;
 
-export const Submit = styled(Button)`
+export const SubmitButton = styled(Button)`
     && {
         ${shared_styles}
         background-color: black;
@@ -144,7 +144,7 @@ export const Submit = styled(Button)`
     }
 `;
 
-export const CourseButtons_div = styled.div`
+export const CourseButtons_Div = styled.div`
     ${flexDisplay('row', 'space-between', 'center')}
     margin: 0.25em 0 1.25em;
     width: 100%;

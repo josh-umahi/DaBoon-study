@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { returnTemplateText, displayCollegeCourses } from '../../Functions';
-import { EducationInfo_div } from './styles';
+import { returnTemplateText, displayCollegeCourses } from '../../Functions/UI_components';
+import { EducationInfo_Div } from './styles';
 
 const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     const [dropDownCoursesIsOpen, setDropDownCoursesIsOpen] = useState(false);
@@ -26,7 +26,7 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     }
     
     return (
-        <EducationInfo_div>
+        <EducationInfo_Div>
             <h1>
                 Hi I’m <span className="secondaryColor">{fullName}</span>, I study&nbsp;
                 <span className="secondaryColor">{collegeMajor}</span> here at LoremIpsum.
@@ -45,7 +45,7 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
                 <button>ENGR 240</button>
                 <button>CSC 230</button>
             </div>
-        </EducationInfo_div>
+        </EducationInfo_Div>
     )
 }
 

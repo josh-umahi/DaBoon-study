@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {SvgIcon} from '@material-ui/core/';
 
-import { GoogleAuth, Form_h6_marginBelow, Submit } from '../styles';
+import { GoogleAuthButton, FormH6_MarginBelow, SubmitButton } from '../styles';
 import TextFieldGrouped from '../components/TextFieldGrouped';
 import GoogleLogo from '../../../images/google_icon.svg';
 import SignUp from '../components/SignUp';
@@ -53,20 +53,20 @@ export default function SignUpPage1({ open, handleClose, handleLogInOpen, handle
       open={open} handleClose={handleClose} 
       handleLogInOpen={handleLogInOpen} resetStates={resetStates}
     >
-      <GoogleAuth fullWidth>
+      <GoogleAuthButton fullWidth>
         <SvgIcon component={GoogleLogo} viewBox="0 0 600 476.6" />
         Sign up with Google
-      </GoogleAuth>
-      <Form_h6_marginBelow>or</Form_h6_marginBelow>
+      </GoogleAuthButton>
+      <FormH6_MarginBelow>or</FormH6_MarginBelow>
       <TextFieldGrouped emailEntry={emailEntry} passwordEntry={passwordEntry}
         setEmailEntry={setEmailEntry} setPasswordEntry={setPasswordEntry}
         textFieldErrorDetails={textFieldErrorDetails}
       />
-      <Submit disabled={submitIsDisabled && !loading} fullWidth 
+      <SubmitButton disabled={submitIsDisabled && !loading} fullWidth 
         onClick={submitSignUpForm}
       >
         Create account
-      </Submit>
+      </SubmitButton>
     </SignUp>
   );
 }

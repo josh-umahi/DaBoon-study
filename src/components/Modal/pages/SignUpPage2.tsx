@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Submit, AuthTextField, Label_header, Label_headerSmall, CourseButtons_div } from '../styles';
+import { SubmitButton, AuthTextField, LabelHeader, LabelHeader_Small, CourseButtons_Div } from '../styles';
 import SelectMajor from '.././components/SelectMajor';
-import { foundErrorInFullName, toggleCourseButtonColor } from '../../../Functions';
+import { foundErrorInFullName, toggleCourseButtonColor } from '../../../Functions/UI_components';
 import SignUp from '../components/SignUp';
 import { useAuth } from '../../../contexts/AuthContext';
-import { CoursesData, defaultCourseButtonStyles, NO_ERROR } from '../../../EnumsAndConstants';
+import { CoursesData, NO_ERROR } from '../../../EnumsAndConstants';
+import { defaultCourseButtonStyles } from '../../../styles/variables';
 
 export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
   const [fullName, setFullName] = useState('')
@@ -83,7 +84,7 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
       open={open} handleClose={handleClose} 
       handleLogInOpen={handleLogInOpen} resetStates={resetStates}
     >
-      <Label_header>Tell us about yourself</Label_header>
+      <LabelHeader>Tell us about yourself</LabelHeader>
       <AuthTextField  
         value={fullName} 
         onChange={(e)=>setFullName(e.target.value)} 
@@ -94,8 +95,8 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
       <SelectMajor
         collegeMajor={collegeMajor} setCollegeMajor={setCollegeMajor}
       />
-      <Label_headerSmall>Courses</Label_headerSmall>
-      <CourseButtons_div>
+      <LabelHeader_Small>Courses</LabelHeader_Small>
+      <CourseButtons_Div>
         {
           CoursesData.map((course, i) => {
             return (
@@ -108,12 +109,12 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
             )
           })
         }
-      </CourseButtons_div>
-      <Submit disabled={submitIsDisabled && !loading} fullWidth 
+      </CourseButtons_Div>
+      <SubmitButton disabled={submitIsDisabled && !loading} fullWidth 
         onClick={submitFinishSignUpForm}
       >
         Finish creating account
-      </Submit>
+      </SubmitButton>
     </SignUp>
   );
 }

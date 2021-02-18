@@ -1,8 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import styled from 'styled-components';
 
-import { Colors } from '../EnumsAndConstants';
-import { flexDisplay } from '../styles/mixins';
+import { Colors } from '../styles/variables';
 
 export const ProfileContainer_div = styled.div`
     width: 100%;
@@ -10,7 +9,10 @@ export const ProfileContainer_div = styled.div`
     background-color: ${Colors.LighterGrey};
     position: fixed;
     z-index: 10;
-    ${flexDisplay('column', 'flex-start', 'center')}
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     
     .MuiPaper-elevation4{
         box-shadow:  0px 0px 4px 2px rgba(61, 61, 61, 0.2);

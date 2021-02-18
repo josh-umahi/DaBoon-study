@@ -1,9 +1,9 @@
 import React from 'react'
 import { MenuItem } from '@material-ui/core';
 
-import { MajorSelect_outerDiv, MajorSelect } from '../styles';
-import { textFieldFontSize } from '../../../EnumsAndConstants';
-import { displayCollegeMajorOptions } from '../../../Functions';
+import { MajorSelect_OuterDiv, MajorSelect } from '../styles';
+import { textFieldFontSize } from '../../../styles/variables';
+import { displayCollegeMajorOptions } from '../../../Functions/UI_components';
 
 const SelectMajor = ({ collegeMajor, setCollegeMajor }) => {
     const handleChange = (e) => {
@@ -11,7 +11,7 @@ const SelectMajor = ({ collegeMajor, setCollegeMajor }) => {
     };
 
     return (
-        <MajorSelect_outerDiv>
+        <MajorSelect_OuterDiv>
             <MajorSelect
                 value={collegeMajor}
                 onChange={handleChange} displayEmpty
@@ -24,7 +24,7 @@ const SelectMajor = ({ collegeMajor, setCollegeMajor }) => {
                 </MenuItem>
                 {displayCollegeMajorOptions()}
             </MajorSelect>
-        </MajorSelect_outerDiv>
+        </MajorSelect_OuterDiv>
     )
 }
 

@@ -1,9 +1,9 @@
 import { Button, Toolbar } from '@material-ui/core';
 import styled, { css } from 'styled-components'
 
-import { Colors } from '../../EnumsAndConstants';
+import { Colors } from '../../styles/variables';
 
-export const Logo_h1 = styled.h1`
+export const LogoText = styled.h1`
     font-family: 'Niconne', cursive;
     font-size: 2.6rem;
     color: ${Colors.Primary};
@@ -24,7 +24,7 @@ export const HeaderToolbar = styled(Toolbar)`
     }
 `;
 
-export const Auth_Button = css`
+const AuthButton = css`
     border-radius: 8px;
     border: 0;
     padding: 0.5em 1.5em;
@@ -32,7 +32,7 @@ export const Auth_Button = css`
 
 export const LogInButton = styled(Button)`
     && {
-        ${Auth_Button}
+        ${AuthButton}
         padding: 0.5em 1em;
         margin-right: 0.5em;
         color: black;
@@ -44,7 +44,7 @@ export const LogInButton = styled(Button)`
 
 export const SignUpButton = styled(Button)`
     && {
-        ${Auth_Button}
+        ${AuthButton}
         background-color: ${Colors.Primary};
         color: white;
         transition: transform 200ms;
@@ -57,7 +57,7 @@ export const SignUpButton = styled(Button)`
 
 export const SignOutButton = styled(Button)`
     && {
-        ${Auth_Button}
+        ${AuthButton}
         background-color: ${Colors.Secondary};
         color: white;
         &:hover {

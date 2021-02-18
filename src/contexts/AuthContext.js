@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useState, useEffect } from 'react'
 import { NO_ERROR } from '../EnumsAndConstants';
 import { auth, db } from '../firebase/config'
-import { firebase_returnErrorDetails } from '../Functions';
+import { returnErrorDetails } from '../Functions/firebase';
 
 const AuthContext = createContext()
 
@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
                         setCurrentUserData(snapshot.data())
                     ).catch(err => { throw err; })
                 } catch (err) {
-                    return firebase_returnErrorDetails((err.code))
+                    return returnErrorDetails((err.code))
                 }
             }
         })()
@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
             .catch(err => { throw err; })
             return NO_ERROR
         } catch (err) {
-            return firebase_returnErrorDetails((err.code))
+            return returnErrorDetails((err.code))
         }
     }
 
@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
             .catch(err => { throw err; })
             return NO_ERROR
         } catch (err) {
-            return firebase_returnErrorDetails((err.code))
+            return returnErrorDetails((err.code))
         }
     }
 

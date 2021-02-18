@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import './styles/reset.css'
-import './styles/main.css'
+import './styles/default_css/reset.css'
+import './styles/default_css/main.css'
 import PrivateRoute from './routes/ProfilePage/';
 import Home from './routes/Home';
 import ProfilePage from './routes/ProfilePage/ProfilePage';

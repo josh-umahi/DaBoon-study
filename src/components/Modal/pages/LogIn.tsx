@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Modal, Backdrop, Fade, SvgIcon} from '@material-ui/core/';
 import { useHistory } from 'react-router-dom';
 
-import useModalStyles, { GoogleAuth, Form_h6, Form_h6_marginBelow, Submit } from '../styles';
+import useModalStyles, { GoogleAuthButton, FormH6, FormH6_MarginBelow, SubmitButton } from '../styles';
 import TextFieldGrouped from '../components/TextFieldGrouped';
 import GoogleLogo from '../../../images/google_icon.svg';
 import { NO_ERROR } from '../../../EnumsAndConstants';
@@ -68,27 +68,27 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
         <Fade in={open}>
           <form className={classes.paper}>
             <div className={classes.innerContainer}>
-              <GoogleAuth fullWidth>
+              <GoogleAuthButton fullWidth>
                 <SvgIcon component={GoogleLogo} viewBox="0 0 600 476.6" />
                 Log in with Google
-              </GoogleAuth>
-              <Form_h6_marginBelow>or</Form_h6_marginBelow>
+              </GoogleAuthButton>
+              <FormH6_MarginBelow>or</FormH6_MarginBelow>
               <TextFieldGrouped emailEntry={emailEntry} passwordEntry={passwordEntry}
                 setEmailEntry={setEmailEntry} setPasswordEntry={setPasswordEntry}
                 textFieldErrorDetails={textFieldErrorDetails}
               />
-              <Submit disabled={submitIsDisabled && !loading} fullWidth 
+              <SubmitButton disabled={submitIsDisabled && !loading} fullWidth 
                 onClick={submitLogInForm}
               >
                 Log in
-              </Submit>
-              <Form_h6>
+              </SubmitButton>
+              <FormH6>
                 <a href="/">Forgot Password?</a>
-              </Form_h6>
+              </FormH6>
               <br/>
-              <Form_h6>
+              <FormH6>
                 Don’t have an account? <button onClick={handleSignUpPage1Open}>Sign up</button>
-              </Form_h6>
+              </FormH6>
             </div>
           </form>
             
