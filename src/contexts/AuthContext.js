@@ -41,8 +41,8 @@ export function AuthProvider({ children }) {
     function signUp(email, password) {
         try {
                 auth.createUserWithEmailAndPassword(email, password)
-            .catch(err => { throw err; })
-            return NO_ERROR
+                .catch(err => { throw err; })
+                return NO_ERROR
         } catch (err) {
             return returnErrorDetails((err.code))
         }
@@ -51,8 +51,8 @@ export function AuthProvider({ children }) {
     function finishSigningUp(uid, fullName, collegeMajor, collegeCourses) {
         try {
                 currentUser.updateProfile({
-                displayName: fullName
-            }).catch(err => { throw err; })
+                    displayName: fullName
+                }).catch(err => { throw err; })
         } catch (err) {
             return err
         }
@@ -88,7 +88,7 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser, currentUserData,
         signUp, finishSigningUp,
-        signOut
+        logIn, signOut
     }
 
     return(

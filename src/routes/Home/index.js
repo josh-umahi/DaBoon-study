@@ -9,7 +9,7 @@ import Theme from '../styles';
 
 const Home = () => {
     const [signUpPage1Open, setSignUpPage1Open] = useState(false);
-    const [signUpPage2Open, setSignUpPage2Open] = useState(true);
+    const [signUpPage2Open, setSignUpPage2Open] = useState(false);
     const [logInOpen, setLogInOpen] = useState(false);
 
     const handleSignUpPage1Open = (e) => {

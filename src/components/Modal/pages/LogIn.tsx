@@ -15,7 +15,7 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
   const [textFieldErrorDetails, setTextFieldErrorDetails] = useState(null)
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
-  const {signUp} = useAuth()
+  const {logIn} = useAuth()
   const history = useHistory()
 
   useEffect(() => {
@@ -38,13 +38,13 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
     e.preventDefault()
     setLoading(true)
 
-    const signUpError = await signUp(emailEntry, passwordEntry)
+    const logInError = await logIn(emailEntry, passwordEntry)
 
-    if (signUpError === NO_ERROR) {
+    if (logInError === NO_ERROR) {
       resetStates()
       history.push('/')
     } else{
-      setTextFieldErrorDetails(signUpError)
+      setTextFieldErrorDetails(logInError)
     }
 
     setLoading(false)
