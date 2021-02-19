@@ -10,74 +10,80 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState()
-    const [currentUserData, setCurrentUserData] = useState()
+    const [currentUser, setCurrentUser] = useState(null)
+    const [currentUserData, setCurrentUserData] = useState(null)
     const [loading, setLoading] = useState(true)
 
     /*** These functions are all you need to change if you want to use another BAAS ***/
     useEffect(() => {
         const unsuscribe = auth.onAuthStateChanged(user => {
             setLoading(false)
-            setCurrentUser(user)
+            user ? setCurrentUser(user) : setCurrentUser(null)
         })
         return unsuscribe
     }, [])
-
+    
     useEffect(() => {
-        ( () => {
-            if (currentUser){
-                try {
-                     db.collection('users').doc(currentUser.uid)
-                    .get().then(snapshot => 
-                        setCurrentUserData(snapshot.data())
-                    ).catch(err => { throw err; })
-                } catch (err) {
-                    return returnErrorDetails((err.code))
-                }
-            }
-        })()
+        setUserData()
     }, [currentUser])
 
-    function signUp(email, password) {
-        try {
-                auth.createUserWithEmailAndPassword(email, password)
-                .catch(err => { throw err; })
-                return NO_ERROR
-        } catch (err) {
-            return returnErrorDetails((err.code))
-        }
+    async function signUp(email, password) {
+        let returnValue = NO_ERROR
+        await auth.createUserWithEmailAndPassword(email, password)
+        .catch(err => {
+            returnValue = returnErrorDetails((err.code))
+        })
+        return returnValue
     }
 
     function finishSigningUp(uid, fullName, collegeMajor, collegeCourses) {
-        try {
-                currentUser.updateProfile({
-                    displayName: fullName
-                }).catch(err => { throw err; })
-        } catch (err) {
-            return err
-        }
+        let returnValue = NO_ERROR
 
-        try {
-                db.collection('users').doc(uid).set({
-                fullName,
-                collegeMajor,
-                collegeCourses
-            })
-        } catch (err) {
-            return err
-        }
+        currentUser.updateProfile({
+            displayName: fullName
+        }).catch(err => { 
+            returnValue = err + '\n\n'; 
+        })
+
+        db.collection('users').doc(uid).set({
+            fullName,
+            collegeMajor,
+            collegeCourses
+        }).catch(err => { 
+            returnValue += err
+        })
         
-        return NO_ERROR
+        setUserData()
+        return returnValue
     }
 
-    function logIn(email, password) {
-        try {
-            auth.signInWithEmailAndPassword(email, password)
-            .catch(err => { throw err; })
-            return NO_ERROR
-        } catch (err) {
-            return returnErrorDetails((err.code))
+    async function getUserData() {
+        let returnValue = null;
+        if (currentUser !== null){
+            await db.collection('users').doc(currentUser.uid)
+            .get().then(snapshot => {
+                returnValue = snapshot.data()
+            }).catch(err => { 
+                console.log(err); 
+            })
         }
+
+        return returnValue
+    }
+
+    async function setUserData() {
+        const userData = await getUserData()
+        console.log(userData)
+        setCurrentUserData(userData)
+    }
+
+    async function logIn(email, password) {
+        let returnValue = NO_ERROR
+        await auth.signInWithEmailAndPassword(email, password)
+        .catch(err => {
+            returnValue = returnErrorDetails((err.code))
+        })
+        return returnValue
     }
 
     function signOut() {

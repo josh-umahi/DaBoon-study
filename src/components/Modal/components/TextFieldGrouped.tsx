@@ -13,7 +13,7 @@ const TextFieldGrouped = ({
     const [helperTextPasswordEntry, setHelperTextPasswordEntry] = useState('')
 
     useEffect(() => {
-        if(textFieldErrorDetails === null){
+        if(textFieldErrorDetails === null || textFieldErrorDetails === undefined){
             // Reset all states
             setIsErrorInEmail(false)
             setIsErrorInPassword(false)

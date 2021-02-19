@@ -35,12 +35,13 @@ export const returnErrorDetails = (errorCode: string) => {
             helperText = 'This user does not exist'
             break;
 
-        case 'auth/user-wrong-password': 
+        case 'auth/wrong-password' || 'auth/too-many-requests': 
             errorType = ErrorIsRegarding.Password
             helperText = 'Wrong password entered'
             break;
 
-        default:console.log("An unknown error occurred in function: returnErrorDetails");
+        default:
+            console.log("An unknown error occurred in function: returnErrorDetails \n" + errorCode);
             errorType = ErrorIsRegarding.Nil
             helperText = 'Email address is not valid'
             break;

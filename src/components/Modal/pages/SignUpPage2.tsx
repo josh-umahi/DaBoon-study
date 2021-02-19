@@ -55,7 +55,7 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
     }
   }
 
-  const submitFinishSignUpForm = async (e) => {
+  const submitFinishSignUpForm = e => {
     e.preventDefault()
     setLoading(true)
     const fullNameTrimmed = fullName.trim()
@@ -65,14 +65,12 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
       setIsErrorInFullName(true)
       setHelperTextFullName("Please enter a valid name")
     } else {
-      const signUpError = await finishSigningUp(currentUser.uid, fullNameTrimmed, collegeMajor, collegeCourses)
+      const signUpError = finishSigningUp(currentUser.uid, fullNameTrimmed, collegeMajor, collegeCourses)
 
       if (signUpError === NO_ERROR) {
         history.push('/')
-        return
       } else{
         console.log(signUpError)
-        alert("An unknown error occured. See console for more details")
       }
     }
 

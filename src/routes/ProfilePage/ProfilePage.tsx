@@ -16,29 +16,17 @@ const ProfilePage = () => {
     const history = useHistory()
 
     useEffect(() => {
-        const fullName = "Josh Jimu"
-        const collegeMajor = "Astrophysics"
-        const collegeCourses = ["CSC 230", "CSC 230", "CSC 230"]
-
-        setFullName(fullName)
-        setCollegeMajor(collegeMajor)
-        setCollegeCourses([...collegeCourses])
-    }, [])
-
-    useEffect(() => {
-        (async () => {
-            if (currentUserData) {
-                const {fullName, collegeMajor, collegeCourses} = await currentUserData
-                setFullName(fullName)
-                setCollegeMajor(collegeMajor)
-                setCollegeCourses([...collegeCourses])
-            }
-        })()
+        if (currentUserData) {
+            const {fullName, collegeMajor, collegeCourses} = currentUserData
+            setFullName(fullName)
+            setCollegeMajor(collegeMajor)
+            setCollegeCourses([...collegeCourses])
+        }
     }, [currentUserData])
 
-    const handleLogOut = async () => {
+    const handleLogOut = () => {
         try {
-            await signOut()
+            signOut()
             history.push('/home')
         } catch (error) {
             console.log("Failed to log out");
