@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import { SubmitButton, AuthTextField, LabelHeader, LabelHeader_Small, CourseButtons_Div } from '../styles';
 import SelectMajor from '.././components/SelectMajor';
-import { foundErrorInFullName, toggleCourseButtonColor } from '../../../Functions/UI_components';
+import { toggleCourseButtonColor } from '../../../Functions/UI_components';
+import { foundErrorInFullName } from '../../../Functions/Under_the_hood';
 import SignUp from '../components/SignUp';
 import { useAuth } from '../../../contexts/AuthContext';
 import { CoursesData, NO_ERROR } from '../../../EnumsAndConstants';

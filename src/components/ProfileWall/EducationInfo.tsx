@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { returnTemplateText, displayCollegeCourses } from '../../Functions/UI_components';
+import { getNonCollegeCourses } from '../../Functions/Under_the_hood';
 import { EducationInfo_Div } from './styles';
 
 const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     const [dropDownCoursesIsOpen, setDropDownCoursesIsOpen] = useState(false);
-    const [templateText, setTemplateText] = useState(returnTemplateText(collegeCourses));
-    const [collegeCoursesDisplayed, setCollegeCoursesDisplayed] = useState(displayCollegeCourses(collegeCourses));
+    const [templateText, setTemplateText] = useState('');
+    const [collegeCoursesDisplayed, setCollegeCoursesDisplayed] = useState(null);
+    const [nonCollegeCourses, setNonCollegeCourses] = useState([]);
     const refForDropDownCourses = useRef(null)
 
     useEffect(() => {
         setTemplateText(returnTemplateText(collegeCourses));
         setCollegeCoursesDisplayed(displayCollegeCourses(collegeCourses));
+        setNonCollegeCourses(getNonCollegeCourses(collegeCourses));
     }, [collegeCourses])
 
     const toggleDropDownCourses = (e) => {
@@ -38,12 +41,13 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
                 Add a new course
             </button>
             <div className="dropDownCourses" ref={refForDropDownCourses}>
-                <button>SENG 265</button>
-                <button>ENGR 240</button>
-                <button>CSC 230</button>
-                <button>SENG 265</button>
-                <button>ENGR 240</button>
-                <button>CSC 230</button>
+                {
+                    nonCollegeCourses.map((course, i) => {
+                        return (
+                            <button key={i}>{course.name}</button>
+                        )
+                    })
+                }
             </div>
         </EducationInfo_Div>
     )

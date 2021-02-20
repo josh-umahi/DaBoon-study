@@ -1,6 +1,6 @@
 import { ErrorIsRegarding } from "../EnumsAndConstants"
 
-export const returnErrorDetails = (errorCode: string) => {
+export const getErrorDetails = (errorCode: string) => {
     let errorType = ErrorIsRegarding.Nil
     let helperText = ''
 
@@ -41,7 +41,7 @@ export const returnErrorDetails = (errorCode: string) => {
             break;
 
         default:
-            console.log("An unknown error occurred in function: returnErrorDetails \n" + errorCode);
+            console.log("An unknown error occurred in function: getErrorDetails \n" + errorCode);
             errorType = ErrorIsRegarding.Nil
             helperText = 'Email address is not valid'
             break;

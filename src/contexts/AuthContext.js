@@ -1,24 +1,28 @@
-import React, { useContext, createContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { NO_ERROR } from '../EnumsAndConstants';
 import { auth, db } from '../firebase/config'
-import { returnErrorDetails } from '../Functions/firebase';
+import { getErrorDetails } from '../Functions/Firebase';
 
-const AuthContext = createContext()
-
-export function useAuth() {
-    return useContext(AuthContext)
-}
+const AuthContext = React.createContext()
+export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserData, setCurrentUserData] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     /*** These functions are all you need to change if you want to use another BAAS ***/
     useEffect(() => {
         const unsuscribe = auth.onAuthStateChanged(user => {
-            setLoading(false)
-            user ? setCurrentUser(user) : setCurrentUser(null)
+            if(user){
+                setCurrentUser(user)
+                setIsAuthenticated(true)
+                localStorage.setItem("isAuthenticated", "1")
+            }else{
+                localStorage.setItem("isAuthenticated", "0")
+                setIsAuthenticated(false)
+                setCurrentUser(null)
+            }
         })
         return unsuscribe
     }, [])
@@ -31,7 +35,7 @@ export function AuthProvider({ children }) {
         let returnValue = NO_ERROR
         await auth.createUserWithEmailAndPassword(email, password)
         .catch(err => {
-            returnValue = returnErrorDetails((err.code))
+            returnValue = getErrorDetails((err.code))
         })
         return returnValue
     }
@@ -58,22 +62,21 @@ export function AuthProvider({ children }) {
     }
 
     async function getUserData() {
-        let returnValue = null;
+        let userData = null;
         if (currentUser !== null){
             await db.collection('users').doc(currentUser.uid)
             .get().then(snapshot => {
-                returnValue = snapshot.data()
+                userData = snapshot.data()
             }).catch(err => { 
                 console.log(err); 
             })
         }
 
-        return returnValue
+        return userData
     }
 
     async function setUserData() {
         const userData = await getUserData()
-        console.log(userData)
         setCurrentUserData(userData)
     }
 
@@ -81,7 +84,7 @@ export function AuthProvider({ children }) {
         let returnValue = NO_ERROR
         await auth.signInWithEmailAndPassword(email, password)
         .catch(err => {
-            returnValue = returnErrorDetails((err.code))
+            returnValue = getErrorDetails((err.code))
         })
         return returnValue
     }
@@ -92,14 +95,14 @@ export function AuthProvider({ children }) {
     /***   *********************************  **/
 
     const value = {
-        currentUser, currentUserData,
+        currentUser, currentUserData, isAuthenticated, 
         signUp, finishSigningUp,
         logIn, signOut
     }
 
     return(
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     )
 }

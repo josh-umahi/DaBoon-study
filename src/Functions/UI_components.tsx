@@ -46,8 +46,3 @@ export const returnTemplateText = (coursesArray: Array<string>) => {
         return TemplateTexts.notTakingCourses
     }
 }
-
-export const foundErrorInFullName = (str: string) => {
-    const Regex = /^[a-zA-Z]{3,}(?: [a-zA-Z]+){0,2}$/
-    return !Regex.test(str)
-}
