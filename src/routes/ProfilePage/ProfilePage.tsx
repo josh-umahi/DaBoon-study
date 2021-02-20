@@ -20,7 +20,7 @@ const ProfilePage = () => {
             const {fullName, collegeMajor, collegeCourses} = currentUserData
             setFullName(fullName)
             setCollegeMajor(collegeMajor)
-            setCollegeCourses([...collegeCourses])
+            setCollegeCourses(collegeCourses)
         }
     }, [currentUserData])
 

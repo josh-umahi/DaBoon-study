@@ -89,6 +89,34 @@ export function AuthProvider({ children }) {
         return returnValue
     }
 
+    async function addNewCourse(e, courseToAdd) {
+        e.preventDefault()
+        if (currentUser !== null){
+            const newCollegeCourses = [...currentUserData.collegeCourses, courseToAdd]
+            db.collection('users').doc(currentUser.uid).update({
+                collegeCourses: newCollegeCourses
+            }).catch(err => { 
+                console.log(err);
+            })
+            setCurrentUserData({...currentUserData, collegeCourses: newCollegeCourses})
+        }
+    }
+
+    async function deleteNewCourse(e, courseToDelete) {
+        e.preventDefault()
+        if (currentUser !== null){
+            const newCollegeCourses = currentUserData.collegeCourses.filter(courseName => {
+                return courseName !== courseToDelete
+            })
+            db.collection('users').doc(currentUser.uid).update({
+                collegeCourses: newCollegeCourses
+            }).catch(err => { 
+                console.log(err);
+            })
+            setCurrentUserData({...currentUserData, collegeCourses: newCollegeCourses})
+        }
+    }
+
     function signOut() {
         return auth.signOut()
     }
@@ -96,8 +124,8 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser, currentUserData, isAuthenticated, 
-        signUp, finishSigningUp,
-        logIn, signOut
+        signUp, finishSigningUp, logIn, signOut, 
+        addNewCourse, deleteNewCourse
     }
 
     return(

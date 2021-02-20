@@ -11,6 +11,11 @@ export const DeleteButton = styled.button`
 
     .MuiSvgIcon-root {
         font-size: 2rem;
+
+        & :hover{
+            transition: all 100ms;
+            color: ${Colors.Secondary}
+        }
     }
 `
 
@@ -46,10 +51,10 @@ export const DisplayPhoto_Div = styled.div`
         ${fontSettings(primaryFont, '14px', 400, 'center', Colors.Primary)}
         margin: 1em;
         background: none;
-    }
 
-    & label:hover{
-        cursor: pointer;
+        & :hover{
+            cursor: pointer;
+        }
     }
 `
 

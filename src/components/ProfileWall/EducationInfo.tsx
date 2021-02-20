@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useAuth } from '../../contexts/AuthContext';
 import { returnTemplateText, displayCollegeCourses } from '../../Functions/UI_components';
 import { getNonCollegeCourses } from '../../Functions/Under_the_hood';
 import { EducationInfo_Div } from './styles';
@@ -9,6 +10,7 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     const [collegeCoursesDisplayed, setCollegeCoursesDisplayed] = useState(null);
     const [nonCollegeCourses, setNonCollegeCourses] = useState([]);
     const refForDropDownCourses = useRef(null)
+    const {addNewCourse} = useAuth()
 
     useEffect(() => {
         setTemplateText(returnTemplateText(collegeCourses));
@@ -43,8 +45,9 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
             <div className="dropDownCourses" ref={refForDropDownCourses}>
                 {
                     nonCollegeCourses.map((course, i) => {
+                        const courseName = course.name
                         return (
-                            <button key={i}>{course.name}</button>
+                            <button onClick={e => addNewCourse(e, courseName)} key={i}>{courseName}</button>
                         )
                     })
                 }
