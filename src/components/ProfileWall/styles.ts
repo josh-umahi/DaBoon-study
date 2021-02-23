@@ -19,7 +19,7 @@ export const DeleteButton = styled.button`
     }
 `
 
-export const DisplayPhoto_Div = styled.div`
+export const DisplayPhoto_Div = styled.div<{displayError: boolean}>`
     margin-top: 100px;
     ${flexDisplay('column', 'flex-start', 'center')}
 
@@ -34,8 +34,8 @@ export const DisplayPhoto_Div = styled.div`
     }
 
     & img{
-        height: 100%;
-        width: auto;
+        height: auto;
+        width: 100%;
     }
 
     & svg{
@@ -43,14 +43,25 @@ export const DisplayPhoto_Div = styled.div`
         font-size: 5rem;
     }
 
+    h6{
+        display: ${props => (props.displayError ? 'block' : 'none')};
+        color: black;
+        margin-top: 0.5em;
+    }
+
+    .actions{
+        display: block;
+    }
+
     & input{
         display: none;
     }
 
-    & label{
+    & label, & button{
         ${fontSettings(primaryFont, '14px', 400, 'center', Colors.Primary)}
         margin: 1em;
         background: none;
+        display: inline-block;
 
         & :hover{
             cursor: pointer;

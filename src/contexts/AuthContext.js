@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { NO_ERROR } from '../EnumsAndConstants';
-import { auth, db } from '../firebase/config'
+import { auth, db, firebaseStorage } from '../firebase/config'
 import { getErrorDetails } from '../Functions/Firebase';
 
 const AuthContext = React.createContext()
@@ -9,6 +9,7 @@ export const useAuth = () => useContext(AuthContext);
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserData, setCurrentUserData] = useState(null)
+    const [photoURL, setPhotoURL] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     /*** These functions are all you need to change if you want to use another BAAS ***/
@@ -28,7 +29,8 @@ export function AuthProvider({ children }) {
     }, [])
     
     useEffect(() => {
-        setUserData()
+        setUserData() //This already has a currentUser error handler in getUserData()
+        currentUser ? setPhotoURL(currentUser.photoURL) : setPhotoURL(null)
     }, [currentUser])
 
     async function signUp(email, password) {
@@ -89,6 +91,39 @@ export function AuthProvider({ children }) {
         return returnValue
     }
 
+    async function updatePhotoURL() {
+        firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
+        .getDownloadURL().then(profileImg => {
+            currentUser.updateProfile({
+                photoURL: profileImg
+            }).catch(err => { 
+                console.log(err);
+            })
+        })
+    }
+
+    async function uploadProfilePicture(file) {
+        await firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
+        .put(file).catch(err => { 
+            console.log(err);
+        })
+    }
+
+    async function changeProfilePicture(file) {
+        await uploadProfilePicture(file)
+        await updatePhotoURL()
+        setPhotoURL(currentUser.photoURL)
+    }
+
+    async function removeProfilePicture(e) {
+        e.preventDefault()
+        currentUser.updateProfile({
+            photoURL: null
+        }).catch(err => { 
+            console.log(err);
+        })
+    }
+
     async function addNewCourse(e, courseToAdd) {
         e.preventDefault()
         if (currentUser !== null){
@@ -125,6 +160,7 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser, currentUserData, isAuthenticated, 
         signUp, finishSigningUp, logIn, signOut, 
+        photoURL, changeProfilePicture, removeProfilePicture,
         addNewCourse, deleteNewCourse
     }
 
