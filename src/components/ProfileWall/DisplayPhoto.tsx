@@ -5,17 +5,22 @@ import { DisplayPhoto_Div } from './styles';
 import { useAuth } from '../../contexts/AuthContext';
 
 const DisplayPhoto = () => {
-    const {photoURL, changeProfilePicture, removeProfilePicture} = useAuth()
+    const {currentUserData, changeProfilePicture, removeProfilePicture} = useAuth()
     const [profilePicURL, setProfilePicURL] = useState('')
     const [displayError, setDisplayError] = useState(false)
 
     useEffect(() => {
-        if (photoURL) {
-            setProfilePicURL(photoURL+'')
+        if (currentUserData) {
+            const {profilePicURL} = currentUserData
+            setProfilePicURL(profilePicURL)
         }else{
             setProfilePicURL('')
         }
-    }, [photoURL])
+    }, [currentUserData])
+
+    useEffect(() => {
+        console.log(profilePicURL)
+    }, [profilePicURL])
 
     const handleChangeProfilePicture = e => {
         const types = ["image/jpeg", "image/png", "image/jpg"]

@@ -9,7 +9,6 @@ export const useAuth = () => useContext(AuthContext);
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserData, setCurrentUserData] = useState(null)
-    const [photoURL, setPhotoURL] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     /*** These functions are all you need to change if you want to use another BAAS ***/
@@ -30,7 +29,6 @@ export function AuthProvider({ children }) {
     
     useEffect(() => {
         setUserData() //This already has a currentUser error handler in getUserData()
-        currentUser ? setPhotoURL(currentUser.photoURL) : setPhotoURL(null)
     }, [currentUser])
 
     async function signUp(email, password) {
@@ -45,18 +43,13 @@ export function AuthProvider({ children }) {
     function finishSigningUp(uid, fullName, collegeMajor, collegeCourses) {
         let returnValue = NO_ERROR
 
-        currentUser.updateProfile({
-            displayName: fullName
-        }).catch(err => { 
-            returnValue = err + '\n\n'; 
-        })
-
         db.collection('users').doc(uid).set({
             fullName,
             collegeMajor,
-            collegeCourses
+            collegeCourses,
+            profilePicURL: ''
         }).catch(err => { 
-            returnValue += err
+            returnValue = err
         })
         
         setUserData()
@@ -91,24 +84,24 @@ export function AuthProvider({ children }) {
         return returnValue
     }
 
-    async function updatePhotoURL() {
-        firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
-        .getDownloadURL().then(profileImg => {
-            currentUser.updateProfile({
-                photoURL: profileImg
-            }).catch(err => { 
-                console.log(err);
-            })
-            setPhotoURL(profileImg)
-        })
-        .catch(err => { 
+    async function uploadProfilePicture(file) {
+        await firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
+        .put(file).catch(err => { 
             console.log(err);
         })
     }
 
-    async function uploadProfilePicture(file) {
-        await firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
-        .put(file).catch(err => { 
+    async function updatePhotoURL() {
+        firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
+        .getDownloadURL().then(profilePicURL => {
+            db.collection('users').doc(currentUser.uid).update({
+                profilePicURL
+            }).catch(err => { 
+                console.log(err);
+            })
+            setCurrentUserData({...currentUserData, profilePicURL})
+        })
+        .catch(err => { 
             console.log(err);
         })
     }
@@ -120,12 +113,19 @@ export function AuthProvider({ children }) {
 
     async function removeProfilePicture(e) {
         e.preventDefault()
-        currentUser.updateProfile({
-            photoURL: null
+        db.collection('users').doc(currentUser.uid).update({
+            profilePicURL: ''
         }).catch(err => { 
             console.log(err);
         })
-        setPhotoURL(null)
+        setCurrentUserData({...currentUserData, profilePicURL: ''})
+
+        firebaseStorage.ref('users/' + currentUser.uid + '/profileImg.jpg')
+        .delete().then(() => {
+            // console.log("Successfully deleted image from storage")
+        }).catch((err) => {
+            console.log(err)
+        });
     }
 
     async function addNewCourse(e, courseToAdd) {
@@ -164,7 +164,7 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser, currentUserData, isAuthenticated, 
         signUp, finishSigningUp, logIn, signOut, 
-        photoURL, changeProfilePicture, removeProfilePicture,
+        changeProfilePicture, removeProfilePicture,
         addNewCourse, deleteNewCourse
     }
 
