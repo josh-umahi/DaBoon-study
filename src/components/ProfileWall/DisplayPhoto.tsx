@@ -15,7 +15,6 @@ const DisplayPhoto = () => {
         }else{
             setProfilePicURL('')
         }
-        console.log("in here")
     }, [photoURL])
 
     const handleChangeProfilePicture = e => {

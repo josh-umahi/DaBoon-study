@@ -99,6 +99,10 @@ export function AuthProvider({ children }) {
             }).catch(err => { 
                 console.log(err);
             })
+            setPhotoURL(profileImg)
+        })
+        .catch(err => { 
+            console.log(err);
         })
     }
 
@@ -112,7 +116,6 @@ export function AuthProvider({ children }) {
     async function changeProfilePicture(file) {
         await uploadProfilePicture(file)
         await updatePhotoURL()
-        setPhotoURL(currentUser.photoURL)
     }
 
     async function removeProfilePicture(e) {
@@ -122,6 +125,7 @@ export function AuthProvider({ children }) {
         }).catch(err => { 
             console.log(err);
         })
+        setPhotoURL(null)
     }
 
     async function addNewCourse(e, courseToAdd) {
