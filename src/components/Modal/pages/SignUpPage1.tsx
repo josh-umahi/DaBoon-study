@@ -5,16 +5,18 @@ import { GoogleAuthButton, FormH6_MarginBelow, SubmitButton } from '../styles';
 import TextFieldGrouped from '../components/TextFieldGrouped';
 import GoogleLogo from '../../../images/google_icon.svg';
 import SignUp from '../components/SignUp';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { NO_ERROR } from '../../../EnumsAndConstants';
+import { useModalContext } from '../../../contexts/ModalContext';
 
-export default function SignUpPage1({ open, handleClose, handleLogInOpen, handleSignUpPage2Open }) {
+export default function SignUpPage1() {
   const [emailEntry, setEmailEntry] = useState('')
   const [passwordEntry, setPasswordEntry] = useState('') 
   const [textFieldErrorDetails, setTextFieldErrorDetails] = useState(null)
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
-  const {signUp} = useAuth()
+  const {signUp} = useAuthContext()
+  const {signUpPage1Open, handleSignUpPage1Close, handleSignUpPage2Open} = useModalContext()
 
   useEffect(() => {
     if (emailEntry === '' || passwordEntry === '') {
@@ -50,8 +52,8 @@ export default function SignUpPage1({ open, handleClose, handleLogInOpen, handle
 
   return (
     <SignUp 
-      open={open} handleClose={handleClose} 
-      handleLogInOpen={handleLogInOpen} resetStates={resetStates}
+      open={signUpPage1Open} handleClose={handleSignUpPage1Close}
+      resetStates={resetStates}
     >
       <GoogleAuthButton fullWidth>
         <SvgIcon component={GoogleLogo} viewBox="0 0 600 476.6" />

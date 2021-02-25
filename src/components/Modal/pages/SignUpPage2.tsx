@@ -6,11 +6,12 @@ import SelectMajor from '.././components/SelectMajor';
 import { toggleCourseButtonColor } from '../../../Functions/UI_components';
 import { foundErrorInFullName } from '../../../Functions/Under_the_hood';
 import SignUp from '../components/SignUp';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { CoursesData, NO_ERROR } from '../../../EnumsAndConstants';
 import { defaultCourseButtonStyles } from '../../../styles/variables';
+import { useModalContext } from '../../../contexts/ModalContext';
 
-export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
+export default function SignUpPage2() {
   const [fullName, setFullName] = useState('')
   const [collegeMajor, setCollegeMajor] = useState('')
   const [collegeCourses, setCollegeCourses] = useState([])
@@ -19,8 +20,9 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
   const [courseButtonStyles, setCourseButtonStyles] = useState({})
-  const {currentUser, finishSigningUp} = useAuth()
+  const {currentUser, finishSigningUp} = useAuthContext()
   const history = useHistory()
+  const {signUpPage2Open, handleSignUpPage2Close} = useModalContext()
 
   useEffect(() => {
     if (fullName === '' || collegeMajor === '') {
@@ -79,10 +81,10 @@ export default function SignUpPage2({ open, handleClose, handleLogInOpen }) {
   }
 
   return (
-    <SignUp 
-      open={open} handleClose={handleClose} 
-      handleLogInOpen={handleLogInOpen} resetStates={resetStates}
-    >
+      <SignUp 
+          open={signUpPage2Open} handleClose={handleSignUpPage2Close}
+          resetStates={resetStates}
+      >
       <LabelHeader>Tell us about yourself</LabelHeader>
       <AuthTextField  
         value={fullName} 

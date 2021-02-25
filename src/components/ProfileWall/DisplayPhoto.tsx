@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import DisplayPicPlaceholder from '@material-ui/icons/Person';
 
 import { DisplayPhoto_Div } from './styles';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const DisplayPhoto = () => {
-    const {currentUserData, changeProfilePicture, removeProfilePicture} = useAuth()
+    const {currentUserData, changeProfilePicture, removeProfilePicture} = useAuthContext()
     const [profilePicURL, setProfilePicURL] = useState('')
     const [displayError, setDisplayError] = useState(false)
 
@@ -17,10 +17,6 @@ const DisplayPhoto = () => {
             setProfilePicURL('')
         }
     }, [currentUserData])
-
-    useEffect(() => {
-        console.log(profilePicURL)
-    }, [profilePicURL])
 
     const handleChangeProfilePicture = e => {
         const types = ["image/jpeg", "image/png", "image/jpg"]

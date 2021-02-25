@@ -8,15 +8,18 @@ import PrivateRoute from './routes/ProfilePage/';
 import Home from './routes/Home';
 import ProfilePage from './routes/ProfilePage/ProfilePage';
 import { AuthProvider } from './contexts/AuthContext';
+import { ModalProvider } from './contexts/ModalContext';
 
 function Index() {
   return (
     <Router>
       <AuthProvider>
-        <Switch>
-          <PrivateRoute exact path='/' component={ProfilePage} />
-          <Route exact path='/home' component={Home} />
-        </Switch>
+        <ModalProvider>
+          <Switch>
+            <PrivateRoute exact path='/' component={ProfilePage} />
+            <Route exact path="/home" component={Home}/>
+          </Switch>
+        </ModalProvider>
       </AuthProvider>
     </Router>
   )

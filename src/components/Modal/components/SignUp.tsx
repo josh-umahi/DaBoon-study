@@ -1,10 +1,26 @@
 import React from 'react';
 import {Modal, Backdrop, Fade} from '@material-ui/core/';
+import { useHistory } from 'react-router-dom';
 
 import useModalStyles, { FormH6 } from '../styles';
+import { useModalContext } from '../../../contexts/ModalContext';
 
-export default function SignUp({ open, handleClose, handleLogInOpen, children, resetStates }) {
+interface SignUpProps {
+  open: boolean, 
+  handleClose: any,
+  isInProfilePage?: boolean,
+  resetStates: any
+}
+
+const SignUp: React.FC<SignUpProps> = ({ open, handleClose, isInProfilePage, resetStates, children }) => {
   const classes = useModalStyles()
+  const history = useHistory()
+  const {handleLogInOpen} = useModalContext()
+
+  const returnToHomePage = e => {
+    e.preventDefault()
+    history.push('/home')
+  }
 
   return (
     <div>
@@ -32,14 +48,21 @@ export default function SignUp({ open, handleClose, handleLogInOpen, children, r
                 <a href="/"> Cookies Policy</a>.
               </FormH6>
               <br/>
-              <FormH6>
-                Already have an account? <button onClick={handleLogInOpen}>Log in</button>
-              </FormH6>
+              {
+                (!isInProfilePage)
+                ? <FormH6>
+                    Already have an account? <button onClick={handleLogInOpen}>Log in</button>
+                  </FormH6>
+                : <FormH6>
+                    Go back to <button onClick={returnToHomePage}>home page</button>
+                  </FormH6> 
+              }
             </div>
           </form>
-            
         </Fade>
       </Modal>
     </div>
   );
 }
+
+export default SignUp

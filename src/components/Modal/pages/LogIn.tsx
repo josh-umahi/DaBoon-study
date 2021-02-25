@@ -6,16 +6,18 @@ import useModalStyles, { GoogleAuthButton, FormH6, FormH6_MarginBelow, SubmitBut
 import TextFieldGrouped from '../components/TextFieldGrouped';
 import GoogleLogo from '../../../images/google_icon.svg';
 import { NO_ERROR } from '../../../EnumsAndConstants';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import { useModalContext } from '../../../contexts/ModalContext';
 
-export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
+export default function LogIn() {
   const classes = useModalStyles()
   const [emailEntry, setEmailEntry] = useState('')
   const [passwordEntry, setPasswordEntry] = useState('') 
   const [textFieldErrorDetails, setTextFieldErrorDetails] = useState(null)
   const [submitIsDisabled, setSubmitIsDisabled] = useState(true)
   const [loading, setLoading] = useState(false)
-  const {logIn} = useAuth()
+  const {logIn} = useAuthContext()
+  const {logInOpen, handleLogInClose, handleSignUpPage1Open} = useModalContext()
   const history = useHistory()
 
   useEffect(() => {
@@ -41,7 +43,6 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
     const logInError = await logIn(emailEntry, passwordEntry)
 
     if (logInError === NO_ERROR) {
-      resetStates()
       history.push('/')
     } else{
       setTextFieldErrorDetails(logInError)
@@ -54,10 +55,10 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
     <div>
       <Modal
         className={classes.modal}
-        open={open}
+        open={logInOpen}
         onClose={e => {
           resetStates()
-          handleClose(e)
+          handleLogInClose(e)
         }}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -65,7 +66,7 @@ export default function LogIn({ open, handleClose, handleSignUpPage1Open }) {
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={logInOpen}>
           <form className={classes.paper}>
             <div className={classes.innerContainer}>
               <GoogleAuthButton fullWidth>

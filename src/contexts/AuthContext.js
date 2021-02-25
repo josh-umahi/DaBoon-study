@@ -4,9 +4,9 @@ import { auth, db, firebaseStorage } from '../firebase/config'
 import { getErrorDetails } from '../Functions/Firebase';
 
 const AuthContext = React.createContext()
-export const useAuth = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext);
 
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserData, setCurrentUserData] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -34,6 +34,13 @@ export function AuthProvider({ children }) {
     async function signUp(email, password) {
         let returnValue = NO_ERROR
         await auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredentials => {
+            db.collection('users').doc(userCredentials.user.uid).set({
+                hasFinishedSignUp: false,
+            }).catch(err => { 
+                console.log(err);
+            })
+        })
         .catch(err => {
             returnValue = getErrorDetails((err.code))
         })
@@ -47,12 +54,22 @@ export function AuthProvider({ children }) {
             fullName,
             collegeMajor,
             collegeCourses,
-            profilePicURL: ''
+            profilePicURL: '',
+            hasFinishedSignUp: true,
         }).catch(err => { 
             returnValue = err
         })
         
         setUserData()
+        return returnValue
+    }
+
+    async function logIn(email, password) {
+        let returnValue = NO_ERROR
+        await auth.signInWithEmailAndPassword(email, password)
+        .catch(err => {
+            returnValue = getErrorDetails((err.code))
+        })
         return returnValue
     }
 
@@ -73,15 +90,6 @@ export function AuthProvider({ children }) {
     async function setUserData() {
         const userData = await getUserData()
         setCurrentUserData(userData)
-    }
-
-    async function logIn(email, password) {
-        let returnValue = NO_ERROR
-        await auth.signInWithEmailAndPassword(email, password)
-        .catch(err => {
-            returnValue = getErrorDetails((err.code))
-        })
-        return returnValue
     }
 
     async function uploadProfilePicture(file) {
