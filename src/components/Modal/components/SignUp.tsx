@@ -17,7 +17,7 @@ const SignUp: React.FC<SignUpProps> = ({ open, handleClose, signUpNotCompleted, 
   const classes = useModalStyles()
   const history = useHistory()
   const {signOut} = useAuthContext()
-  const {handleLogInOpen, resetModalStates} = useModalContext()
+  const {resetModalStates} = useModalContext()
 
   const returnToHomePage = e => {
     e.preventDefault()
@@ -44,7 +44,7 @@ const SignUp: React.FC<SignUpProps> = ({ open, handleClose, signUpNotCompleted, 
         }}
       >
         <Fade in={open}>
-          <form className={classes.paper}>
+          <div className={classes.paper}>
             <div className={classes.innerContainer}>
               {children}
               <FormH6>
@@ -54,17 +54,11 @@ const SignUp: React.FC<SignUpProps> = ({ open, handleClose, signUpNotCompleted, 
                 <a href="/"> Cookies Policy</a>.
               </FormH6>
               <br/>
-              {
-                (!signUpNotCompleted)
-                ? <FormH6>
-                    Already have an account? <button onClick={handleLogInOpen}>Log in</button>
-                  </FormH6>
-                : <FormH6>
-                    Go back to <button onClick={returnToHomePage}>home page</button>
-                  </FormH6> 
-              }
+              <FormH6>
+                Go back to <button onClick={returnToHomePage}>home page</button>
+              </FormH6> 
             </div>
-          </form>
+          </div>
         </Fade>
       </Modal>
     </div>

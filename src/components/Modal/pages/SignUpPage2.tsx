@@ -22,7 +22,7 @@ export default function SignUpPage2() {
   const [courseButtonStyles, setCourseButtonStyles] = useState({})
   const {currentUser, finishSigningUp} = useAuthContext()
   const history = useHistory()
-  const {signUpPage2Open, handleSignUpPage2Close, signUpNotCompleted} = useModalContext()
+  const {signUpPage2Open, handleSignUpPage2Close, signUpNotCompleted, resetModalStates} = useModalContext()
 
   useEffect(() => {
     if (fullName === '' || collegeMajor === '') {
@@ -71,7 +71,12 @@ export default function SignUpPage2() {
       const signUpError = finishSigningUp(currentUser.uid, fullNameTrimmed, collegeMajor, collegeCourses)
 
       if (signUpError === NO_ERROR) {
-        history.push('/')
+        if (history.location.pathname === '/') {
+          resetModalStates()
+        }else{
+          resetModalStates()
+          history.push('/')
+        }
       } else{
         console.log(signUpError)
       }

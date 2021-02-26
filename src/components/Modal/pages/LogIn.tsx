@@ -67,7 +67,7 @@ export default function LogIn() {
         }}
       >
         <Fade in={logInOpen}>
-          <form className={classes.paper}>
+          <div className={classes.paper}>
             <div className={classes.innerContainer}>
               <GoogleAuthButton fullWidth>
                 <SvgIcon component={GoogleLogo} viewBox="0 0 600 476.6" />
@@ -91,8 +91,7 @@ export default function LogIn() {
                 Don’t have an account? <button onClick={handleSignUpPage1Open}>Sign up</button>
               </FormH6>
             </div>
-          </form>
-            
+          </div>
         </Fade>
       </Modal>
     </div>

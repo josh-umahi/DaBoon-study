@@ -37,6 +37,7 @@ export const ModalProvider = ({ children }) => {
     const handleSignUpPage2Close = (e) => {
         e.preventDefault()
         setSignUpPage2Open(false);
+        setSignUpNotCompleted(false) // to ensure that next logged in user isn't faced with a signUpPage2
     };
 
     const handleLogInOpen = (e) => {

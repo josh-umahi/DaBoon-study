@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
                 .get().then(snapshot => {
                     setSignUpNotCompleted(snapshot.data().signUpNotCompleted)
                 }).catch(err => { 
-                    console.log(err); 
+                    console.log(err + '\n' + 'Not a problem if this is happening after the first page of Sign up'); 
                 })
             }else{
                 localStorage.setItem("isAuthenticated", "0")
