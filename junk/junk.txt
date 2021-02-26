@@ -4,3 +4,45 @@
         console.log(userData)
         setCurrentUserData(userData)
     }
+
+
+
+
+
+    import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+import './styles/default_css/reset.css'
+import './styles/default_css/main.css'
+import PrivateRoute from './routes/ProfilePage/';
+import Home from './routes/Home';
+import ProfilePage from './routes/ProfilePage/ProfilePage';
+import { AuthProvider } from './contexts/AuthContext';
+
+function Index() {
+  return (
+    <Router>
+      <AuthProvider>
+        <Switch>
+          <PrivateRoute exact path='/' component={ProfilePage} />
+          <Route exact path="/home" component={Home}/>
+          {/* <Route exact path='/home'>
+            <Home openSignUpPage2={false} />
+          </Route> */}
+          {/* <Route path='/home/signUpPageOpen'
+            render={(props) => {
+              <Home {...props} 
+                openSignUpPage2={true} 
+              />
+            }}
+          /> */}
+        </Switch>
+      </AuthProvider>
+    </Router>
+  )
+}
+
+ReactDOM.render(
+  <Index />, document.getElementById('root')
+);

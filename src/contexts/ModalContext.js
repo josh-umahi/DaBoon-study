@@ -7,6 +7,14 @@ export const ModalProvider = ({ children }) => {
     const [signUpPage1Open, setSignUpPage1Open] = useState(false);
     const [signUpPage2Open, setSignUpPage2Open] = useState(false);
     const [logInOpen, setLogInOpen] = useState(false);
+    const [signUpNotCompleted, setSignUpNotCompleted] = useState(false);
+
+    const resetModalStates = () =>{
+        setSignUpPage1Open(false)
+        setSignUpPage2Open(false)
+        setLogInOpen(false)
+        setSignUpNotCompleted(false)
+    }
 
     const handleSignUpPage1Open = (e) => {
         e.preventDefault()
@@ -49,7 +57,9 @@ export const ModalProvider = ({ children }) => {
         signUpPage2Open, setSignUpPage2Open,
         handleSignUpPage2Open, handleSignUpPage2Close,
         logInOpen, setLogInOpen,
-        handleLogInOpen, handleLogInClose
+        handleLogInOpen, handleLogInClose,
+        signUpNotCompleted, setSignUpNotCompleted,
+        resetModalStates
     }
 
     return(

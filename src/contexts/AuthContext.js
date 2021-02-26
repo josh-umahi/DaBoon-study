@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { NO_ERROR } from '../EnumsAndConstants';
 import { auth, db, firebaseStorage } from '../firebase/config'
 import { getErrorDetails } from '../Functions/Firebase';
+import { useModalContext } from './ModalContext';
 
 const AuthContext = React.createContext()
 export const useAuthContext = () => useContext(AuthContext);
@@ -10,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserData, setCurrentUserData] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const {setSignUpNotCompleted} = useModalContext()
 
     /*** These functions are all you need to change if you want to use another BAAS ***/
     useEffect(() => {
@@ -18,6 +20,13 @@ export const AuthProvider = ({ children }) => {
                 setCurrentUser(user)
                 setIsAuthenticated(true)
                 localStorage.setItem("isAuthenticated", "1")
+
+                db.collection('users').doc(user.uid)
+                .get().then(snapshot => {
+                    setSignUpNotCompleted(snapshot.data().signUpNotCompleted)
+                }).catch(err => { 
+                    console.log(err); 
+                })
             }else{
                 localStorage.setItem("isAuthenticated", "0")
                 setIsAuthenticated(false)
@@ -36,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         await auth.createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
             db.collection('users').doc(userCredentials.user.uid).set({
-                hasFinishedSignUp: false,
+                signUpNotCompleted: true,
             }).catch(err => { 
                 console.log(err);
             })
@@ -55,7 +64,7 @@ export const AuthProvider = ({ children }) => {
             collegeMajor,
             collegeCourses,
             profilePicURL: '',
-            hasFinishedSignUp: true,
+            signUpNotCompleted: false,
         }).catch(err => { 
             returnValue = err
         })

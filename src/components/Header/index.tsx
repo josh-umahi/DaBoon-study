@@ -14,13 +14,15 @@ const Header: React.FC<HeaderProps> = ({showSignOut}) => {
     const {handleSignUpPage1Open, handleLogInOpen} = useModalContext()
     const history = useHistory()
     const {signOut} = useAuthContext()
+    const {resetModalStates} = useModalContext()
 
     const handleLogOut = () => {
         try {
             signOut()
+            resetModalStates()
             history.push('/home')
-        } catch (error) {
-            console.log("Failed to log out");
+        } catch (err) {
+            console.log(err);
         }
     }
 

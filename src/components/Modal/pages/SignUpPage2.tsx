@@ -22,7 +22,7 @@ export default function SignUpPage2() {
   const [courseButtonStyles, setCourseButtonStyles] = useState({})
   const {currentUser, finishSigningUp} = useAuthContext()
   const history = useHistory()
-  const {signUpPage2Open, handleSignUpPage2Close} = useModalContext()
+  const {signUpPage2Open, handleSignUpPage2Close, signUpNotCompleted} = useModalContext()
 
   useEffect(() => {
     if (fullName === '' || collegeMajor === '') {
@@ -83,7 +83,7 @@ export default function SignUpPage2() {
   return (
       <SignUp 
           open={signUpPage2Open} handleClose={handleSignUpPage2Close}
-          resetStates={resetStates}
+          resetStates={resetStates} signUpNotCompleted={signUpNotCompleted}
       >
       <LabelHeader>Tell us about yourself</LabelHeader>
       <AuthTextField  

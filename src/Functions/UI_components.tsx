@@ -12,7 +12,7 @@ export const displayCollegeMajorOptions = () => {
 }
 
 export const displayCollegeCourses = (coursesArray: string[]) => {
-    if (coursesArray.length > 0) {
+    if (coursesArray && coursesArray.length > 0) {
         return (
             <div className="courseCards_div">
                 {
@@ -40,7 +40,7 @@ export const toggleCourseButtonColor = e => {
 }
 
 export const returnTemplateText = (coursesArray: string[]) => {
-    if (coursesArray.length > 0) {
+    if (coursesArray && coursesArray.length > 0) {
         return TemplateTexts.takingCourses
     }else{
         return TemplateTexts.notTakingCourses

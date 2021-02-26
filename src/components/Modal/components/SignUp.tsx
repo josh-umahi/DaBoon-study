@@ -4,21 +4,25 @@ import { useHistory } from 'react-router-dom';
 
 import useModalStyles, { FormH6 } from '../styles';
 import { useModalContext } from '../../../contexts/ModalContext';
+import { useAuthContext } from '../../../contexts/AuthContext';
 
 interface SignUpProps {
   open: boolean, 
   handleClose: any,
-  isInProfilePage?: boolean,
+  signUpNotCompleted?: boolean,
   resetStates: any
 }
 
-const SignUp: React.FC<SignUpProps> = ({ open, handleClose, isInProfilePage, resetStates, children }) => {
+const SignUp: React.FC<SignUpProps> = ({ open, handleClose, signUpNotCompleted, resetStates, children }) => {
   const classes = useModalStyles()
   const history = useHistory()
-  const {handleLogInOpen} = useModalContext()
+  const {signOut} = useAuthContext()
+  const {handleLogInOpen, resetModalStates} = useModalContext()
 
   const returnToHomePage = e => {
     e.preventDefault()
+    resetModalStates()
+    signOut()
     history.push('/home')
   }
 
@@ -28,8 +32,10 @@ const SignUp: React.FC<SignUpProps> = ({ open, handleClose, isInProfilePage, res
         className={classes.modal}
         open={open}
         onClose={e => {
-          resetStates()
-          handleClose(e)
+          if(!signUpNotCompleted){
+            resetStates()
+            handleClose(e)
+          }
         }}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -49,7 +55,7 @@ const SignUp: React.FC<SignUpProps> = ({ open, handleClose, isInProfilePage, res
               </FormH6>
               <br/>
               {
-                (!isInProfilePage)
+                (!signUpNotCompleted)
                 ? <FormH6>
                     Already have an account? <button onClick={handleLogInOpen}>Log in</button>
                   </FormH6>

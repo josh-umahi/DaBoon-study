@@ -13,14 +13,14 @@ import { ModalProvider } from './contexts/ModalContext';
 function Index() {
   return (
     <Router>
-      <AuthProvider>
-        <ModalProvider>
+      <ModalProvider>
+        <AuthProvider>
           <Switch>
             <PrivateRoute exact path='/' component={ProfilePage} />
             <Route exact path="/home" component={Home}/>
           </Switch>
-        </ModalProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ModalProvider>
     </Router>
   )
 }

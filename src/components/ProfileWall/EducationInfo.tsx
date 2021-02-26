@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
+
 import { useAuthContext } from '../../contexts/AuthContext';
 import { returnTemplateText, displayCollegeCourses } from '../../Functions/UI_components';
 import { getNonCollegeCourses } from '../../Functions/Under_the_hood';
-import SignUpPage2 from '../Modal/pages/SignUpPage2';
 import { EducationInfo_Div } from './styles';
+import { useModalContext } from '../../contexts/ModalContext';
+import SignUpPage2 from '../../components/Modal/pages/SignUpPage2';
 
 const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     const [dropDownCoursesIsOpen, setDropDownCoursesIsOpen] = useState(false);
@@ -12,12 +14,17 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     const [nonCollegeCourses, setNonCollegeCourses] = useState([]);
     const refForDropDownCourses = useRef(null)
     const {addNewCourse} = useAuthContext()
+    const {signUpNotCompleted, setSignUpPage2Open} = useModalContext()
 
     useEffect(() => {
         setTemplateText(returnTemplateText(collegeCourses));
         setCollegeCoursesDisplayed(displayCollegeCourses(collegeCourses));
         setNonCollegeCourses(getNonCollegeCourses(collegeCourses));
     }, [collegeCourses])
+
+    useEffect(() => {
+        signUpNotCompleted ? setSignUpPage2Open(true) : setSignUpPage2Open(false)
+    }, [signUpNotCompleted])
 
     const toggleDropDownCourses = (e) => {
         e.preventDefault()
@@ -33,11 +40,10 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
     
     return (
         <>
-            {/* <SignUpPage2 open={true} isInProfilePage={true} 
-                handleLogInOpen={e=>{e.preventDefault()}} 
-                handleClose={e=>{e.preventDefault()}}
-            /> */}
-            <EducationInfo_Div>
+        {
+            (signUpNotCompleted)
+            ? <SignUpPage2  /> 
+            : <EducationInfo_Div>
                 <h1>
                     Hi I’m <span className="secondaryColor">{fullName}</span>, I study&nbsp;
                     <span className="secondaryColor">{collegeMajor}</span> here at LoremIpsum.
@@ -50,7 +56,7 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
                 </button>
                 <div className="dropDownCourses" ref={refForDropDownCourses}>
                     {
-                        nonCollegeCourses.map((course, i) => {
+                        nonCollegeCourses && nonCollegeCourses.map((course, i) => {
                             const courseName = course.name
                             return (
                                 <button onClick={e => addNewCourse(e, courseName)} key={i}>{courseName}</button>
@@ -59,6 +65,7 @@ const EducationInfo = ({ fullName, collegeMajor, collegeCourses }) => {
                     }
                 </div>
             </EducationInfo_Div>
+        }
         </>
     )
 }

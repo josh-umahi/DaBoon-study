@@ -1,9 +1,11 @@
 import { CoursesData } from '../EnumsAndConstants'
 
 export const getNonCollegeCourses = (userCollegeCourses: string[]) => {
-    return CoursesData.filter(course => {
-        return !userCollegeCourses.includes(course.name)
-    })
+    if(userCollegeCourses){
+        return CoursesData.filter(course => {
+            return !userCollegeCourses.includes(course.name)
+        })
+    }
 }
 
 export const foundErrorInFullName = (str: string) => {
