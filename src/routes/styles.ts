@@ -1,7 +1,17 @@
+import { CircularProgress } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import styled from 'styled-components';
 
 import { Colors } from '../styles/variables';
+
+
+export const EducationInfoCircularProgress = styled(CircularProgress)`
+    margin-top: 2.5em;
+
+    .MuiCircularProgress-svg{
+        color: ${Colors.Primary};
+    }
+`
 
 export const ProfileContainer_div = styled.div`
     width: 100%;

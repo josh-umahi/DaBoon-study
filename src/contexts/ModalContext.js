@@ -8,12 +8,16 @@ export const ModalProvider = ({ children }) => {
     const [signUpPage2Open, setSignUpPage2Open] = useState(false);
     const [logInOpen, setLogInOpen] = useState(false);
     const [signUpNotCompleted, setSignUpNotCompleted] = useState(false);
+    const [loadingDisplayPicture, setLoadingDisplayPicture] = useState(false);
+    const [loadingProfile, setLoadingProfile] = useState(false);
 
     const resetModalStates = () =>{
         setSignUpPage1Open(false)
         setSignUpPage2Open(false)
         setLogInOpen(false)
         setSignUpNotCompleted(false)
+        setLoadingDisplayPicture(false)
+        setLoadingProfile(false)
     }
 
     const handleSignUpPage1Open = (e) => {
@@ -60,6 +64,8 @@ export const ModalProvider = ({ children }) => {
         logInOpen, setLogInOpen,
         handleLogInOpen, handleLogInClose,
         signUpNotCompleted, setSignUpNotCompleted,
+        loadingDisplayPicture, setLoadingDisplayPicture,
+        loadingProfile, setLoadingProfile,
         resetModalStates
     }
 

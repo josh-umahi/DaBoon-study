@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [currentUserData, setCurrentUserData] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const {setSignUpNotCompleted} = useModalContext()
+    const {setLoadingDisplayPicture} = useModalContext()
 
     /*** These functions are all you need to change if you want to use another BAAS ***/
     useEffect(() => {
@@ -124,6 +125,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     async function changeProfilePicture(file) {
+        setLoadingDisplayPicture(true)
         await uploadProfilePicture(file)
         await updatePhotoURL()
     }

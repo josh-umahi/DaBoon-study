@@ -34,6 +34,7 @@ const SignUp: React.FC<SignUpProps> = ({ open, handleClose, signUpNotCompleted, 
         onClose={e => {
           if(!signUpNotCompleted){
             resetStates()
+            signOut()
             handleClose(e)
           }
         }}

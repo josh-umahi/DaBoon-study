@@ -1,8 +1,14 @@
-import { Card } from '@material-ui/core';
+import { Card, CircularProgress } from '@material-ui/core';
 import styled from 'styled-components';
 
 import { Colors, primaryFont } from '../../styles/variables';
 import { flexDisplay, fontSettings } from '../../styles/mixins';
+
+export const ImageCircularProgress = styled(CircularProgress)`
+    .MuiCircularProgress-svg{
+        color: ${Colors.Primary};
+    }
+`
 
 export const DeleteButton = styled.button`
     padding: 0;
